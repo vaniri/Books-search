@@ -1,10 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-route-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import './App.css';
+// import './App.css';
 import Nav from './components/Nav';
-import BookContainer from '/components/BookContainer';
-import Form from './components/Form';
 import Search from './pages/Search';
 import Books from './pages/Books'
 
@@ -21,8 +19,6 @@ function App() {
                         <Books />
                     </Route>
                 </Switch>
-                <Form />
-                <BookContainer />
             </div>
         </Router>
     )

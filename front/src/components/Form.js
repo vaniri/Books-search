@@ -12,17 +12,17 @@ class Form extends Component {
     }
 
     handleChange = event => {
-        const { bookTitle, value } = event.target;
+        const { name, value } = event.target;
 
         this.setState({
-            [bookTitle]: value
+            [name]: value
         });
     }
 
     onFormSubmit = (event) => {
-        event.PreventDefault();
+        event.preventDefault();
 
-        this.props.handleChange(this.state);
+        this.props.handleSubmit(this.state);
         this.setState(this.initialState);
     }
 
@@ -36,8 +36,8 @@ class Form extends Component {
                     name='book'
                     id='book'
                     value={bookTitle}
-                    onChange={this.handleChange}>
-                    placeholder='Book Title'
+                    onChange={this.handleChange}
+                    placeholder='Book Title'>
                 </input>
                 <button type='submit'>
                     Search

@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyparser = require('body_parser');
+const bodyparser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -20,11 +20,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.route('/books')
     .get(async (req, res) => {
         try {
-            let allBooks = await db.Book.find();
-            console.log(allBooks);
+            let books = await db.Book.find();
+            console.log(books);
+            res.json({ books });
         } catch (err) {
             console.log("Error find books", err);
-            req.json({ message: "FAIL", reason: err });
+            res.json({ message: "FAIL", reason: err });
 
         }
     })
@@ -40,20 +41,21 @@ app.route('/books')
     })
 
 app.route('/books/:id')
-    .get(async (req, res) => {
+    .delete(async (req, res) => {
         try {
             await db.Book.findByIdAndDelete({ '_id': req.params.id });
-            console.log("Book delite sucse");
+            console.log("Book deleted successfully");
         } catch (err) {
             console.log("FAIL delete Book", err);
             res.json({ message: "FAIL", reason: err });
         }
     })
 
-app.get("/*", async (req, res) => {
-    res.send("index", {});
+app.get("*", async (req, res) => {
+    res.sendFile(path.join(__dirname, "./front/build/index.html"));
 });
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log('app listening at http://localhost:3000');
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+    console.log(`app listening at http://localhost:${port}`);
 });

@@ -1,7 +1,7 @@
-const mangoose = require('mangoose');
-const { Shema } = mangoose;
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const BooksShema = new Shema ({
+const BooksSchema = new Schema ({
     title: String,
     author: String,
     description: String,
@@ -9,6 +9,6 @@ const BooksShema = new Shema ({
     link: String
 })
 
-const Book = mangoose.model('Book', BooksShema)
+const Book = mongoose.model('Book', BooksSchema)
 
 module.exports = Book;

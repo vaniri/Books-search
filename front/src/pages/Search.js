@@ -4,14 +4,16 @@ import Form from '../components/Form'
 import axios from 'axios';
 
 class Search extends Component {
-    constuctor(props) {
+    constructor(props) {
 
         super(props);
-        this.sate = { books: [] };
+        this.state = { books: [] };
     }
 
-    handleSubmit = books => {
-        this.setState({books: [...this.state.books, books]});
+    handleSubmit = async booktitle => {
+        const res = await axios.get('goole');
+        console.log(res);
+        this.setState({ books: res }); //TODO
     }
 
     async componentDidMount() {
