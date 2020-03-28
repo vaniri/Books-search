@@ -3,7 +3,8 @@ const bodyparser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
-const db = require('./models/books')
+const db = require('./models/books');
+const utils = require('./front/src/utils');
 
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/books', {
     userNewUrlParser: true
@@ -15,6 +16,12 @@ app.use(bodyparser.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.route('/books')
     .get(async (req, res) => {
@@ -29,13 +36,22 @@ app.route('/books')
         }
     })
     .post(async (req, res) => {
+        let bookObjs = req.body.map(item => ({
+            ident: utils.getIdentifier(item.industryIdentifiers),
+            title: item.title,
+            authors: item.authors,
+            publisher: item.publisher,
+            description: item.description,
+            image: item.imageLinks.thumbnail,
+            link: item.infoLink
+        }));
+
         try {
-            let result = await db.Book.create(req.body);
-            console.log(result);
-            res.json({ message: "OK", result });
+            let inserted = await db.Book.create(bookObjs);
+            res.json({ message: "OK" });
         } catch (err) {
             console.log("FAIL creating Book", err);
-            res.json({ message: "FAIL", reason: err });
+            res.json({ message: "FAIL", reason: err.toString() });
         }
     })
 
