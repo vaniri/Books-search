@@ -1,5 +1,5 @@
 import React from 'react';
-// import './style.css';
+import './style.css';
 
 const BookContainer = ({ title, author, description, image, link }) => {
     return (

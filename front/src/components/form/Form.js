@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './style.css';
 
 class Form extends Component {
     constructor(props) {
@@ -12,10 +13,10 @@ class Form extends Component {
     }
 
     handleChange = event => {
-        const { name, value } = event.target;
+        const { value } = event.target;
 
         this.setState({
-            [name]: value
+            bookTitle: value
         });
     }
 

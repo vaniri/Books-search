@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // import './App.css';
-import Nav from './components/Nav';
+import Nav from './components/navbar/Nav';
 import Search from './pages/Search';
-import Books from './pages/Books'
+import Books from './pages/Books';
 
 function App() {
     return (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BookContainer from '../components/BookContainer'
 import axios from 'axios';
+import BookContainer from '../components/book-conatiner/BookContainer'
 
 class Books extends Component {
     constructor(props) {
@@ -9,14 +9,15 @@ class Books extends Component {
     }
 
     async componentDidMount() {
-        const response = await axios.get('http://localhost:3001/books');
-        const { books } = response;
+        const res = await axios.get('http://localhost:3001/books');
+        const { books } = res;
+        console.log("component", res)
         this.setState({ books })
     }
 
     render() {
         return (
-            <div>
+            <div id="books_container">
                 {this.state.books.map(({ _id, title, author, description, image, link }) => (
                     <BookContainer
                         key={_id}
