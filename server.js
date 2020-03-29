@@ -37,15 +37,15 @@ app.route('/books')
         }
     })
     .post(async (req, res) => {
-        let bookObjs = req.body.map(item => ({
-            ident: utils.getIdentifier(item.industryIdentifiers),
-            title: item.title,
-            authors: item.authors,
-            publisher: item.publisher,
-            description: item.description,
-            image: item.imageLinks.thumbnail,
-            link: item.infoLink
-        }));
+        let bookObjs = {
+            ident: utils.getIdentifier(req.body.industryIdentifiers),
+            title: req.body.title,
+            authors: req.body.authors,
+            publisher: req.body.publisher,
+            description: req.body.description,
+            image: req.body.imageLinks.thumbnail,
+            link: req.body.infoLink
+        };
 
         try {
             let inserted = await db.Book.create(bookObjs);

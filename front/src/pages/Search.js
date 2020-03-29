@@ -14,41 +14,48 @@ class Search extends Component {
     handleSubmit = async ({ bookTitle }) => {
         const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitle}&key=`);
         this.setState({ books: res.data.items.map(book => book.volumeInfo) });
-        console.log(res.data.items[0].volumeInfo);
+    }
+
+    saveBook = async (book) => {
         try {
-            if (this.state.books) {
-                let res = await axios.post('http://localhost:3001/books', this.state.books);
-                if (res.data.message === "OK") {
-                    console.log("Book posted successfully");
-                } else {
-                    throw res.data.reason;
-                }
+            let res = await axios.post('http://localhost:3001/books', book);
+            if (res.data.message === "OK") {
+                console.log("Book posted successfully");
+            } else {
+                throw res.data.reason;
             }
         } catch (err) {
-            console.log("Unable to post: ", err);
+            console.log("Unable to post:", err);
         }
     }
 
-render() {
-    return (
-        <div id="form_container">
-            <Form handleSubmit={this.handleSubmit} />
-            <div>
-                {this.state.books.map(({ industryIdentifiers, title, authors, description, imageLinks, infoLink, publisher }) => (
-                    <BookContainer
-                        key={utils.getIdentifier(industryIdentifiers)}
-                        title={title}
-                        author={authors ? authors.join(", ") : publisher}
-                        description={description}
-                        image={imageLinks.thumbnail}
-                        link={infoLink}
-                    />
-                ))}
+    render() {
+        return (
+            <div id="form_container">
+                <div>
+                    <Form handleSubmit={this.handleSubmit} />
+                    {this.state.books.map(book => {
+                        let { industryIdentifiers, title, authors, description, imageLinks, infoLink, publisher } = book;
+                        let ident = utils.getIdentifier(industryIdentifiers);
+                        return (
+                            <div key={ident}>
+                                <BookContainer
+                                    key={ident}
+                                    title={title}
+                                    author={authors ? authors.join(", ") : publisher}
+                                    description={description}
+                                    image={imageLinks.thumbnail}
+                                    link={infoLink}
+                                />
+                                <button className="save_book" onClick={() => this.saveBook(book)}>SAVE BOOK</button>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
-        </div>
 
-    )
-}
+        )
+    }
 }
 
 export default Search;

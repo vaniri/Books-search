@@ -21,11 +21,11 @@ class Books extends Component {
         }
     }
 
-    deleteBook = async id => {
+    deleteBook = async (ident) => {
         try {
-            const res = await axios.delete('http://localhost:3001/books/' + id);
-            if (res.data.message === "OK") { 
-                let books = this.state.books.filter(book => book.ident !== id); 
+            const res = await axios.delete(`http://localhost:3001/books/${ident}`);
+            if (res.data.message === "OK") {
+                let books = this.state.books.filter(book => book.ident !== ident);
                 this.setState({ books });
             } else {
                 throw res.data.reason;
@@ -55,4 +55,4 @@ class Books extends Component {
         )
     }
 }
-    export default Books;
+export default Books;
