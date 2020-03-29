@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const BooksSchema = new Schema ({
-    ident: String,
+    ident: {
+        type: String,
+        unique: true
+    },
     title: String,
     authors: [String],
     publisher: String,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import BookContainer from '../components/book-conatiner/BookContainer'
 import Form from '../components/form/Form'
 import axios from 'axios';
-import { getIdentifier } from '../utils';
+import utils from '../utils';
 
 class Search extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Search extends Component {
     }
 
     handleSubmit = async ({ bookTitle }) => {
-        const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitle}&key=""`);
+        const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitle}&key=`);
         this.setState({ books: res.data.items.map(book => book.volumeInfo) });
         console.log(res.data.items[0].volumeInfo);
         try {
@@ -29,18 +29,6 @@ class Search extends Component {
         }
     }
 
-
-async componentDidMount() {
-    try {
-        const res = await axios.get('/books');
-        const { data: books } = res;
-        this.setState({ books });
-    } catch (err) {
-        console.log("Unable to query for books:\n", err);
-    }
-
-}
-
 render() {
     return (
         <div id="form_container">
@@ -48,7 +36,7 @@ render() {
             <div>
                 {this.state.books.map(({ industryIdentifiers, title, authors, description, imageLinks, infoLink, publisher }) => (
                     <BookContainer
-                        key={getIdentifier(industryIdentifiers)}
+                        key={utils.getIdentifier(industryIdentifiers)}
                         title={title}
                         author={authors ? authors.join(", ") : publisher}
                         description={description}

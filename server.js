@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, OPTIONS, POST, DELETE");
     next();
 });
 
@@ -58,8 +59,9 @@ app.route('/books')
 app.route('/books/:id')
     .delete(async (req, res) => {
         try {
-            await db.Book.findByIdAndDelete({ '_id': req.params.id });
+            await db.Book.findOneAndDelete({ 'ident': req.params.id });
             console.log("Book deleted successfully");
+            res.json({ message: "OK" });
         } catch (err) {
             console.log("FAIL delete Book", err);
             res.json({ message: "FAIL", reason: err });
