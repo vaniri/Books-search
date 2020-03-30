@@ -43,7 +43,7 @@ class Books extends Component {
                         <BookContainer
                             key={ident + "/cont"}
                             image={image}
-                            clickHandler={() => this.deleteBook()}
+                            clickHandler={() => this.deleteBook(ident)}
                             text="DELETE BOOK"
                             title={title}
                             author={author}
