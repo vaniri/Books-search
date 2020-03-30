@@ -6,7 +6,7 @@ const path = require('path');
 const db = require('./models/books');
 const utils = require('./front/src/utils');
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/books', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/books', {
     userNewUrlParser: true
 });
 
