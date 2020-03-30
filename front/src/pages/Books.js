@@ -38,17 +38,18 @@ class Books extends Component {
     render() {
         return (
             <div id="books_container">
-                {this.state.books.map(({ ident, title, author, description, image, link }) => (
+                {this.state.books.map(({ ident, image, title, author, description, link }) => (
                     <div key={ident}>
                         <BookContainer
                             key={ident + "/cont"}
+                            image={image}
+                            clickHandler={() => this.deleteBook()}
+                            text="DELETE BOOK"
                             title={title}
                             author={author}
                             description={description}
-                            image={image}
                             link={link}
                         />
-                        <button className="delete_book" onClick={() => this.deleteBook(ident)}>DELETE BOOK</button>
                     </div>
                 ))}
             </div>

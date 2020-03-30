@@ -1,3 +1,28 @@
 .book_container {
+    widows: 80%;
     margin: 1em;
+    padding: 1em;
+    border: solid 0.05em cyan; 
+    display: grid;
+    grid-template-columns: 20% 75%;
+    grid-gap: 0.5em;
+    text-align: justify;
+}
+
+.img-btn-container {
+    text-align: center;
+    margin-top: 0.5em;
+    display: block;
+}
+
+.button {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    background: white
+}
+
+.button:hover{
+    background: #426277;
+    color: white;
+    cursor: pointer;
 }

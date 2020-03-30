@@ -35,19 +35,20 @@ class Search extends Component {
                 <div>
                     <Form handleSubmit={this.handleSubmit} />
                     {this.state.books.map(book => {
-                        let { industryIdentifiers, title, authors, description, imageLinks, infoLink, publisher } = book;
+                        let { industryIdentifiers, imageLinks, title, authors, description, infoLink, publisher } = book;
                         let ident = utils.getIdentifier(industryIdentifiers);
                         return (
                             <div key={ident}>
                                 <BookContainer
+                                    image={imageLinks.thumbnail}
+                                    clickHandler={() => this.saveBook(book)}
+                                    text="SAVE BOOK"
                                     key={ident}
                                     title={title}
                                     author={authors ? authors.join(", ") : publisher}
                                     description={description}
-                                    image={imageLinks.thumbnail}
                                     link={infoLink}
                                 />
-                                <button className="save_book" onClick={() => this.saveBook(book)}>SAVE BOOK</button>
                             </div>
                         )
                     })}
