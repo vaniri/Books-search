@@ -15,7 +15,9 @@ app.use(morgan('dev'));
 app.use(bodyparser.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('front/build'));
+}
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
