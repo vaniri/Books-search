@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently \"node server.js\" \"cd front && npm start\"",
-    "heroku-postbuid": "cd front && npm install && npm run build"
+    "heroku-postbuild": "cd front && npm install && npm run build"
   },
   "description": "",
   "main": "server.js",
