@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.route('/books')
+app.route('/api/books')
     .get(async (req, res) => {
         try {
             let books = await db.Book.find();
@@ -58,7 +58,7 @@ app.route('/books')
         }
     })
 
-app.route('/books/:id')
+app.route('/api/books/:id')
     .delete(async (req, res) => {
         try {
             await db.Book.findOneAndDelete({ 'ident': req.params.id });

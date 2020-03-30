@@ -14,7 +14,7 @@ class Books extends Component {
 
     renderBooks = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/books');
+            const res = await axios.get('/api/books');
             this.setState({ books: res.data.books });
         } catch (err) {
             console.log("Unable to query for books:\n", err);
@@ -23,7 +23,7 @@ class Books extends Component {
 
     deleteBook = async (ident) => {
         try {
-            const res = await axios.delete(`http://localhost:3001/books/${ident}`);
+            const res = await axios.delete(`/api/books/${ident}`);
             if (res.data.message === "OK") {
                 let books = this.state.books.filter(book => book.ident !== ident);
                 this.setState({ books });

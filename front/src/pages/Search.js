@@ -18,7 +18,7 @@ class Search extends Component {
 
     saveBook = async (book) => {
         try {
-            let res = await axios.post('http://localhost:3001/books', book);
+            let res = await axios.post('/api/books', book);
             if (res.data.message === "OK") {
                 console.log("Book posted successfully");
             } else {
