@@ -31,6 +31,7 @@ class Form extends Component {
         const { bookTitle } = this.state;
 
         return (
+            <div>
             <form onSubmit={this.onFormSubmit}>
                 <input
                     type='text'
@@ -44,6 +45,7 @@ class Form extends Component {
                     Search
                 </button>
             </form>
+            </div>
         )
     }
 }

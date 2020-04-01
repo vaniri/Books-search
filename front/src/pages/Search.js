@@ -13,7 +13,9 @@ class Search extends Component {
 
     handleSubmit = async ({ bookTitle }) => {
         const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitle}&key=`);
-        this.setState({ books: res.data.items.map(book => book.volumeInfo) });
+        if(res.status === 200) {
+            this.setState({ books: res.data.items.map(book => book.volumeInfo) });
+        } else { alert("Sorry, book not found!"); }
     }
 
     saveBook = async (book) => {
@@ -31,7 +33,7 @@ class Search extends Component {
 
     render() {
         return (
-            <div id="form_container">
+            <div id="container">
                 <div>
                     <Form handleSubmit={this.handleSubmit} />
                     {this.state.books.map(book => {

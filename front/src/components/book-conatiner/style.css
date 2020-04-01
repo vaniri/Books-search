@@ -2,7 +2,6 @@
     widows: 80%;
     margin: 1em;
     padding: 1em;
-    border: solid 0.05em cyan; 
     display: grid;
     grid-template-columns: 20% 75%;
     grid-gap: 0.5em;
@@ -15,14 +14,30 @@
     display: block;
 }
 
+.book_info {
+    border-bottom: solid 0.05em #426277;
+    padding: 1em;
+}
+
 .button {
     margin: 1em 0;
     padding: 0.5em 1em;
-    background: white
+    background: white;
+    border: solid 0.05em tomato;
+    color: tomato;
 }
 
-.button:hover{
+.button:hover {
     background: #426277;
     color: white;
     cursor: pointer;
+    border: none;
+}
+
+a {
+    color: tomato;
+}
+
+a:hover {
+    text-decoration: none;
 }

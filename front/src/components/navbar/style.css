@@ -1,17 +1,21 @@
 .nav_menu {
-    border-bottom: solid 0.05em teal;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: 0.5rem 1rem;
-  }
+}
 
-  .nav_item{
-      margin: 0.5em;
-  }
+.nav_item {
+    margin: 0.5em;
+    color: tomato;
+    font-weight: 600;
+}
 
-  #nav_icon {
-      width: 5%;
-  }
+.nav_item:hover {
+    color: #323f4e;
+    text-decoration: none;
+}
 
-  
+#nav_icon {
+    width: 4%;
+}
