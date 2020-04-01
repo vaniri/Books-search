@@ -4,6 +4,8 @@ import Form from '../components/form/Form'
 import axios from 'axios';
 import utils from '../utils';
 
+const GOOGLE_API_KEY="";
+
 class Search extends Component {
     constructor(props) {
 
@@ -12,7 +14,7 @@ class Search extends Component {
     }
 
     handleSubmit = async ({ bookTitle }) => {
-        const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitle}&key=`);
+        const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitle}&key=${GOOGLE_API_KEY}`);
         if(res.status === 200) {
             this.setState({ books: res.data.items.map(book => book.volumeInfo) });
         } else { alert("Sorry, book not found!"); }
